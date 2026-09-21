@@ -18,8 +18,8 @@
         }
 
         html, body {
-            width: 100vw;
-            height: 100vh;
+            width: 100%;
+            height: 100%;
             height: 100dvh;
             margin: 0;
             padding: 0;
@@ -36,15 +36,15 @@
             position: relative;
         }
 
-        /* --- BACKGROUND ANIMASI DINAMIS & ESTETIK --- */
+        /* --- BACKGROUND ANIMASI DINAMIS --- */
         .bg-glow-1, .bg-glow-2 {
             position: absolute;
-            width: 250px;
-            height: 250px;
+            width: 200px;
+            height: 200px;
             border-radius: 50%;
-            filter: blur(70px);
+            filter: blur(60px);
             z-index: 0;
-            opacity: 0.3;
+            opacity: 0.35;
             animation: floatGlow 12s ease-in-out infinite alternate;
             pointer-events: none;
         }
@@ -72,7 +72,7 @@
             position: absolute;
             inset: 0;
             background-image: radial-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px);
-            background-size: 24px 24px;
+            background-size: 20px 20px;
             z-index: 1;
             pointer-events: none;
         }
@@ -106,21 +106,22 @@
             box-shadow: 0 8px 25px 0 rgba(0, 0, 0, 0.5);
         }
 
-        /* --- CONTAINER FLIPBOOK (PRESISI TANPA OVERFLOW) --- */
+        /* --- CONTAINER FLIPBOOK (DIOPTIMALKAN UNTUK HP 360PX - 390PX) --- */
         .flipbook-wrapper {
             position: relative;
             width: 100%;
+            max-width: 390px;
             flex: 1 1 auto;
             display: flex;
             justify-content: center;
             align-items: center;
             z-index: 10;
-            padding: 0 10px;
+            padding: 0 4px;
             overflow: hidden;
         }
 
         .flip-book {
-            box-shadow: 0 15px 35px rgba(0,0,0,0.6);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.6);
             display: none;
             margin: auto;
         }
@@ -186,22 +187,22 @@
     <div id="tap-right" class="tap-zone tap-zone-right"></div>
 
     <!-- Header / Bagian Atas -->
-    <header class="w-full pt-2 pb-0.5 px-3 text-center z-20 flex flex-col items-center justify-center pointer-events-none flex-shrink-0">
+    <header class="w-full pt-2 pb-1 px-2 text-center z-20 flex flex-col items-center justify-center pointer-events-none flex-shrink-0">
         <!-- Nama Kelompok (DI PALING ATAS) -->
-        <div class="mb-1 px-2.5 py-0.5 rounded-full bg-slate-800/60 backdrop-blur-sm border border-white/10 shadow-sm">
-            <p class="text-[9px] sm:text-[10px] font-semibold tracking-wide text-slate-300">
+        <div class="mb-1 px-2.5 py-0.5 rounded-full bg-slate-800/70 backdrop-blur-sm border border-white/10 shadow-sm">
+            <p class="text-[10px] font-semibold tracking-wide text-slate-300">
                 kelompok 2 kokurikules <span class="text-cyan-400 font-extrabold">XII F7</span>
             </p>
         </div>
 
         <!-- Judul Utama -->
-        <h1 class="bubble-anim text-base sm:text-2xl font-black tracking-wide text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.6)] leading-tight">
+        <h1 class="bubble-anim text-base font-black tracking-wide text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.6)] leading-tight">
             EH, KOK <span class="text-cyan-400 underline decoration-indigo-500 decoration-2 underline-offset-4">INTERNET</span> TAU?
         </h1>
         
         <!-- Sub-Judul -->
-        <div class="bubble-sub-anim mt-1 px-2.5 py-0.5 rounded-lg bg-slate-900/80 backdrop-blur-md border border-white/10 shadow-md">
-            <p class="text-[9px] sm:text-xs font-bold tracking-wider text-slate-200">
+        <div class="bubble-sub-anim mt-1 px-2 py-0.5 rounded-lg bg-slate-900/80 backdrop-blur-md border border-white/10 shadow-md">
+            <p class="text-[9px] font-bold tracking-wider text-slate-200">
                 <span class="text-yellow-400 font-extrabold">JEJAK DIGITAL</span> 
                 <span class="text-slate-400 mx-0.5">DAN</span> 
                 <span class="text-pink-400 font-extrabold">MASA DEPAN REMAJA</span>
@@ -209,7 +210,7 @@
         </div>
     </header>
 
-    <!-- Wrapper Majalah STABIL -->
+    <!-- Wrapper Majalah PRESISI HP 360px - 390px -->
     <div class="flipbook-wrapper">
         <div id="flipbook" class="flip-book">
             
@@ -240,23 +241,23 @@
     <!-- File Audio -->
     <audio id="bg-music" src="music.mp3" loop preload="auto"></audio>
 
-    <!-- Widget Pemutar Musik Modern (Dinaikkan Posisi & Ringkas) -->
-    <footer class="w-full pb-4 pt-1 z-50 flex justify-center items-center flex-shrink-0">
-        <div class="glass-panel rounded-full py-1.5 px-3.5 flex items-center gap-3 shadow-xl border border-white/20 bg-slate-900/90">
+    <!-- Widget Pemutar Musik Modern (Presisi Tengah Bawah) -->
+    <footer class="w-full pb-3 pt-1 z-50 flex justify-center items-center flex-shrink-0">
+        <div class="glass-panel rounded-full py-1 px-3 flex items-center gap-2.5 shadow-xl border border-white/20 bg-slate-900/90">
             
             <!-- Tombol Play / Pause -->
-            <button id="play-btn" class="w-8 h-8 rounded-full bg-gradient-to-r from-cyan-500 to-blue-600 text-white flex justify-center items-center hover:opacity-95 transition-all shadow-md active:scale-95 focus:outline-none cursor-pointer flex-shrink-0">
-                <i class="fas fa-play text-[10px] ml-0.5" id="play-icon"></i>
+            <button id="play-btn" class="w-7 h-7 rounded-full bg-gradient-to-r from-cyan-500 to-blue-600 text-white flex justify-center items-center hover:opacity-95 transition-all shadow-md active:scale-95 focus:outline-none cursor-pointer flex-shrink-0">
+                <i class="fas fa-play text-[9px] ml-0.5" id="play-icon"></i>
             </button>
             
             <!-- Informasi Lagu -->
-            <div class="flex flex-col justify-center min-w-[75px] max-w-[120px] cursor-default text-left">
-                <span class="text-xs font-bold text-white tracking-tight truncate">33x</span>
-                <span class="text-[10px] font-medium text-cyan-300 tracking-wide truncate">Perunggu</span>
+            <div class="flex flex-col justify-center min-w-[70px] max-w-[110px] cursor-default text-left">
+                <span class="text-[11px] font-bold text-white tracking-tight truncate">33x</span>
+                <span class="text-[9px] font-medium text-cyan-300 tracking-wide truncate">Perunggu</span>
             </div>
 
             <!-- Equalizer Gelombang Audio -->
-            <div id="equalizer" class="flex items-end h-3.5 ml-0.5 px-1 flex-shrink-0">
+            <div id="equalizer" class="flex items-end h-3 ml-0.5 px-0.5 flex-shrink-0">
                 <div class="bar" style="height: 3px;"></div>
                 <div class="bar" style="height: 7px;"></div>
                 <div class="bar" style="height: 4px;"></div>
@@ -272,15 +273,15 @@
         document.addEventListener('DOMContentLoaded', function() {
             const flipBookElement = document.getElementById('flipbook');
             
-            // Konfigurasi Presisi untuk Stabilitas Layar HP
+            // Ukuran khusus untuk layar HP 360px - 390px
             const pageFlip = new St.PageFlip(flipBookElement, {
-                width: 280,
-                height: 390,
+                width: 310,
+                height: 430,
                 size: "stretch",
-                minWidth: 180,
-                maxWidth: 550,
-                minHeight: 250,
-                maxHeight: 800,
+                minWidth: 260,
+                maxWidth: 390,
+                minHeight: 360,
+                maxHeight: 560,
                 maxShadowOpacity: 0.35,
                 showCover: true,
                 mobileScrollSupport: false,
