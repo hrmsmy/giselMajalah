@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Majalah 3D Interaktif</title>
+    
+    <!-- Tailwind CSS untuk Styling Cepat & Responsif -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome untuk Ikon Play/Pause -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* Desain Background & Glassmorphism */
+        body {
+            /* Latar belakang gradasi modern */
+            background: linear-gradient(135deg, #e0eafc 0%, #cfdef3 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 97vh;
+            margin: 0;
+            overflow: hidden;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        /* Efek Kaca Blur untuk Widget Musik */
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
+        }
+
+        /* Styling Majalah */
+        .flip-book {
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            display: none; /* Disembunyikan sebentar sebelum JS selesai memuat */
+        }
+        .page {
+            background-color: #fff;
+            overflow: hidden;
+        }
+        .page.--left {
+            border-right: 1px solid rgba(0,0,0,0.15); /* Bayangan lipatan tengah */
+        }
+        .page.--right {
+            border-left: 1px solid rgba(0,0,0,0.15); /* Bayangan lipatan tengah */
+        }
+
+        /* Animasi Equalizer Musik */
+        .bar {
+            width: 3px;
+            background-color: #4f46e5; /* Warna Indigo Tailwind */
+            margin: 0 1.5px;
+            border-radius: 2px;
+            transition: height 0.2s ease;
+        }
+        /* Animasi hanya berjalan saat class 'playing' aktif */
+        .playing .bar {
+            animation: sound 400ms -800ms linear infinite alternate;
+        }
+        .playing .bar:nth-child(1) { animation-delay: -200ms; }
+        .playing .bar:nth-child(2) { animation-delay: -400ms; }
+        .playing .bar:nth-child(3) { animation-delay: -600ms; }
+        .playing .bar:nth-child(4) { animation-delay: -800ms; }
+        
+        @keyframes sound {
+            0% { height: 3px; opacity: 0.5; }
+            100% { height: 16px; opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Container Utama Majalah -->
+    <div class="container mx-auto px-2 md:px-4 flex justify-center h-[85vh] items-center">
+        <!-- Area Flipbook -->
+        <div id="flipbook">
+            
+            <!-- 1. Sampul Depan (Gunakan data-density="hard" agar kaku seperti hardcover) -->
+            <div class="page page-cover" data-density="hard">
+                <img src="images/1.png" alt="Cover Depan" class="w-full h-full object-cover">
+            </div>
+
+            <!-- 2. Halaman Isi (Kertas biasa, lentur) -->
+            <div class="page">
+                <img src="images/2.png" alt="Halaman 2" class="w-full h-full object-cover">
+            </div>
+            <div class="page">
+                <img src="images/3.png" alt="Halaman 3" class="w-full h-full object-cover">
+            </div>
+            <div class="page">
+                <img src="images/4.png" alt="Halaman 4" class="w-full h-full object-cover">
+            </div>
+
+            <!-- 3. Sampul Belakang (Hardcover) -->
+            <div class="page page-cover" data-density="hard">
+                <img src="images/5.png
+                " alt="Cover Belakang" class="w-full h-full object-cover">
+            </div>
+            
+            <!-- Catatan: Jika halamanmu lebih banyak, cukup copy-paste <div class="page"> di atas -->
+        </div>
+    </div>
+
+    <!-- File Audio (Pastikan nama file dan foldernya sesuai) -->
+    <audio id="bg-music" src="music.mp3" loop></audio>
+    <audio id="sound-flip" src="flip.mp3"></audio>
+
+
+    <!-- Widget Pemutar Musik -->
+    <div class="fixed bottom-6 right-6 md:bottom-10 md:right-10 glass-panel rounded-2xl p-3 px-4 flex items-center gap-4 z-50 transition-all hover:scale-105">
+        
+        <!-- Tombol Play/Pause -->
+        <button id="play-btn" class="w-12 h-12 rounded-full bg-indigo-600 text-white flex justify-center items-center hover:bg-indigo-700 transition shadow-lg focus:outline-none">
+            <i class="fas fa-play ml-1" id="play-icon"></i>
+        </button>
+        
+        <!-- Detail Lagu -->
+        <div class="flex flex-col w-32 md:w-40 cursor-default">
+            <span class="text-sm font-bold text-gray-800 truncate">33x</span>
+            <span class="text-xs text-gray-600 truncate">Perunggu</span>
+        </div>
+
+        <!-- Indikator Equalizer -->
+        <div id="equalizer" class="flex items-end h-5 ml-1">
+            <div class="bar" style="height: 4px;"></div>
+            <div class="bar" style="height: 8px;"></div>
+            <div class="bar" style="height: 6px;"></div>
+            <div class="bar" style="height: 10px;"></div>
+        </div>
+    </div>
+
+    <!-- Library StPageFlip (Untuk efek 3D) -->
+    <script src="https://cdn.jsdelivr.net/npm/page-flip/dist/js/page-flip.browser.min.js"></script>
+    
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // 1. Konfigurasi Majalah
+        const flipBookElement = document.getElementById('flipbook');
+        flipBookElement.style.display = 'block'; // Tampilkan setelah JS siap
+
+        const pageFlip = new St.PageFlip(flipBookElement, {
+            width: 450,               // Lebar dasar 1 halaman (dalam pixel)
+            height: 600,              // Tinggi dasar 1 halaman
+            size: "stretch",          // Agar responsif di HP & Laptop
+            minWidth: 300,
+            maxWidth: 1000,
+            minHeight: 400,
+            maxHeight: 1350,
+            maxShadowOpacity: 0.3,    // Kepekatan bayangan lipatan kertas
+            showCover: true,          // Halaman pertama dan terakhir merespons sebagai cover
+            mobileScrollSupport: false // Mencegah layar ikut scroll saat men-swipe halaman
+        });
+
+        // Memuat elemen HTML menjadi halaman majalah
+        pageFlip.loadFromHTML(document.querySelectorAll('.page'));
+
+        // --- TAMBAHAN KODE: Logika Suara Kertas ---
+        const soundFlip = document.getElementById('sound-flip');
+        
+        // Event listener yang mendeteksi setiap kali halaman dibalik
+        pageFlip.on('flip', function(e) {
+            if (soundFlip) {
+                soundFlip.currentTime = 0; // Reset ke detik 0 agar suara tidak putus jika di-slide cepat
+                soundFlip.play().catch(function(error) {
+                    console.log("Browser memblokir suara otomatis sebelum user berinteraksi.");
+                });
+            }
+        });
+        // ------------------------------------------
+
+        // 2. Logika Pemutar Musik
+        const audio = document.getElementById('bg-music');
+        const playBtn = document.getElementById('play-btn');
+        const playIcon = document.getElementById('play-icon');
+        const equalizer = document.getElementById('equalizer');
+
+        playBtn.addEventListener('click', function() {
+            if (audio.paused) {
+                audio.play();
+                // Ubah ikon ke Pause
+                playIcon.classList.remove('fa-play', 'ml-1');
+                playIcon.classList.add('fa-pause');
+                // Jalankan animasi equalizer
+                equalizer.classList.add('playing');
+            } else {
+                audio.pause();
+                // Ubah ikon ke Play
+                playIcon.classList.remove('fa-pause');
+                playIcon.classList.add('fa-play', 'ml-1');
+                // Hentikan animasi equalizer
+                equalizer.classList.remove('playing');
+            }
+        });
+    });
+</script>
+</body>
+</html>
