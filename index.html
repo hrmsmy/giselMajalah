@@ -18,12 +18,12 @@
         }
 
         html, body {
-            width: 100%;
-            height: 100%;
+            width: 100vw;
+            height: 100vh;
             height: 100dvh;
             margin: 0;
             padding: 0;
-            overflow: hidden;
+            overflow: hidden !important;
             background-color: #090d16;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
         }
@@ -106,11 +106,11 @@
             box-shadow: 0 8px 25px 0 rgba(0, 0, 0, 0.5);
         }
 
-        /* --- CONTAINER FLIPBOOK (DIBUAT STABIL TERKONTROL) --- */
+        /* --- CONTAINER FLIPBOOK (PRESISI TANPA OVERFLOW) --- */
         .flipbook-wrapper {
             position: relative;
             width: 100%;
-            height: calc(100dvh - 160px);
+            flex: 1 1 auto;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -186,9 +186,16 @@
     <div id="tap-right" class="tap-zone tap-zone-right"></div>
 
     <!-- Header / Bagian Atas -->
-    <header class="w-full pt-2 pb-1 px-3 text-center z-20 flex flex-col items-center justify-center pointer-events-none flex-shrink-0">
+    <header class="w-full pt-2 pb-0.5 px-3 text-center z-20 flex flex-col items-center justify-center pointer-events-none flex-shrink-0">
+        <!-- Nama Kelompok (DI PALING ATAS) -->
+        <div class="mb-1 px-2.5 py-0.5 rounded-full bg-slate-800/60 backdrop-blur-sm border border-white/10 shadow-sm">
+            <p class="text-[9px] sm:text-[10px] font-semibold tracking-wide text-slate-300">
+                kelompok 2 kokurikules <span class="text-cyan-400 font-extrabold">XII F7</span>
+            </p>
+        </div>
+
         <!-- Judul Utama -->
-        <h1 class="bubble-anim text-lg sm:text-2xl font-black tracking-wide text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.6)] leading-tight">
+        <h1 class="bubble-anim text-base sm:text-2xl font-black tracking-wide text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.6)] leading-tight">
             EH, KOK <span class="text-cyan-400 underline decoration-indigo-500 decoration-2 underline-offset-4">INTERNET</span> TAU?
         </h1>
         
@@ -198,13 +205,6 @@
                 <span class="text-yellow-400 font-extrabold">JEJAK DIGITAL</span> 
                 <span class="text-slate-400 mx-0.5">DAN</span> 
                 <span class="text-pink-400 font-extrabold">MASA DEPAN REMAJA</span>
-            </p>
-        </div>
-
-        <!-- Nama Kelompok -->
-        <div class="mt-1 px-2.5 py-0.5 rounded-full bg-slate-800/60 backdrop-blur-sm border border-white/10 shadow-sm">
-            <p class="text-[9px] sm:text-[10px] font-semibold tracking-wide text-slate-300">
-                kelompok 2 kokurikules <span class="text-cyan-400 font-extrabold">XII F7</span>
             </p>
         </div>
     </header>
@@ -240,8 +240,8 @@
     <!-- File Audio -->
     <audio id="bg-music" src="music.mp3" loop preload="auto"></audio>
 
-    <!-- Widget Pemutar Musik Modern (CENTER Bottom) -->
-    <footer class="w-full pb-3 pt-1 z-50 flex justify-center items-center flex-shrink-0">
+    <!-- Widget Pemutar Musik Modern (Dinaikkan Posisi & Ringkas) -->
+    <footer class="w-full pb-4 pt-1 z-50 flex justify-center items-center flex-shrink-0">
         <div class="glass-panel rounded-full py-1.5 px-3.5 flex items-center gap-3 shadow-xl border border-white/20 bg-slate-900/90">
             
             <!-- Tombol Play / Pause -->
@@ -274,13 +274,13 @@
             
             // Konfigurasi Presisi untuk Stabilitas Layar HP
             const pageFlip = new St.PageFlip(flipBookElement, {
-                width: 300,
-                height: 420,
+                width: 280,
+                height: 390,
                 size: "stretch",
-                minWidth: 200,
-                maxWidth: 600,
-                minHeight: 280,
-                maxHeight: 850,
+                minWidth: 180,
+                maxWidth: 550,
+                minHeight: 250,
+                maxHeight: 800,
                 maxShadowOpacity: 0.35,
                 showCover: true,
                 mobileScrollSupport: false,
