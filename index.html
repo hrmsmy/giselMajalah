@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
-    <title>Majalah 3D Interaktif</title>
+    <title>Majalah</title>
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -79,16 +79,16 @@
 
         /* --- HEADER & ANIMASI BUBBLE --- */
         .bubble-anim {
-            animation: bubbleFloat 2s ease-in-out infinite alternate;
+            animation: bubbleFloat 3s ease-in-out infinite alternate;
         }
 
         @keyframes bubbleFloat {
             0% { transform: translateY(0px); }
-            100% { transform: translateY(-5px); }
+            100% { transform: translateY(-3px); }
         }
 
         .bubble-sub-anim {
-            animation: subBubbleFloat 2.4s ease-in-out infinite alternate;
+            animation: subBubbleFloat 2.8s ease-in-out infinite alternate;
             animation-delay: 0.2s;
         }
 
@@ -186,22 +186,15 @@
     <div id="tap-left" class="tap-zone tap-zone-left"></div>
     <div id="tap-right" class="tap-zone tap-zone-right"></div>
 
-    <!-- Header / Bagian Atas -->
-    <header class="w-full pt-2 pb-1 px-2 text-center z-20 flex flex-col items-center justify-center pointer-events-none flex-shrink-0">
-        <!-- Nama Kelompok (DI PALING ATAS) -->
-        <div class="mb-1 px-2.5 py-0.5 rounded-full bg-slate-800/70 backdrop-blur-sm border border-white/10 shadow-sm">
-            <p class="text-[10px] font-semibold tracking-wide text-slate-300">
-                kelompok 2 kokurikules <span class="text-cyan-400 font-extrabold">XII F7</span>
-            </p>
-        </div>
-
+    <!-- Header / Bagian Atas (2 Teks Judul Utama) -->
+    <header class="w-full pt-3 pb-1 px-3 text-center z-20 flex flex-col items-center justify-center pointer-events-none flex-shrink-0">
         <!-- Judul Utama -->
         <h1 class="bubble-anim text-base font-black tracking-wide text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.6)] leading-tight">
             EH, KOK <span class="text-cyan-400 underline decoration-indigo-500 decoration-2 underline-offset-4">INTERNET</span> TAU?
         </h1>
         
         <!-- Sub-Judul -->
-        <div class="bubble-sub-anim mt-1 px-2 py-0.5 rounded-lg bg-slate-900/80 backdrop-blur-md border border-white/10 shadow-md">
+        <div class="bubble-sub-anim mt-1 px-2.5 py-0.5 rounded-lg bg-slate-900/80 backdrop-blur-md border border-white/10 shadow-md">
             <p class="text-[9px] font-bold tracking-wider text-slate-200">
                 <span class="text-yellow-400 font-extrabold">JEJAK DIGITAL</span> 
                 <span class="text-slate-400 mx-0.5">DAN</span> 
@@ -241,29 +234,38 @@
     <!-- File Audio -->
     <audio id="bg-music" src="music.mp3" loop preload="auto"></audio>
 
-    <!-- Widget Pemutar Musik Modern (Presisi Tengah Bawah) -->
-    <footer class="w-full pb-3 pt-1 z-50 flex justify-center items-center flex-shrink-0">
-        <div class="glass-panel rounded-full py-1 px-3 flex items-center gap-2.5 shadow-xl border border-white/20 bg-slate-900/90">
-            
+    <!-- Footer: Nama Kelompok (Kiri) dan Widget Musik (Kanan) Sejajar -->
+    <footer class="w-full px-3 pb-3 pt-1 z-50 flex justify-between items-center flex-shrink-0">
+        
+        <!-- Nama Kelompok (Di Sebelah Kiri) -->
+        <div class="px-2.5 py-1.5 rounded-full bg-slate-900/90 backdrop-blur-md border border-white/20 shadow-xl flex items-center">
+            <p class="text-[9px] font-semibold tracking-wide text-slate-300 whitespace-nowrap">
+                kelompok 2 kokurikules <span class="text-cyan-400 font-extrabold">XII F7</span>
+            </p>
+        </div>
+
+        <!-- Widget Pemutar Musik Modern (Di Sebelah Kanan) -->
+        <div class="glass-panel rounded-full py-1 px-2.5 flex items-center gap-2 shadow-xl border border-white/20 bg-slate-900/90">
             <!-- Tombol Play / Pause -->
-            <button id="play-btn" class="w-7 h-7 rounded-full bg-gradient-to-r from-cyan-500 to-blue-600 text-white flex justify-center items-center hover:opacity-95 transition-all shadow-md active:scale-95 focus:outline-none cursor-pointer flex-shrink-0">
-                <i class="fas fa-play text-[9px] ml-0.5" id="play-icon"></i>
+            <button id="play-btn" class="w-6 h-6 rounded-full bg-gradient-to-r from-cyan-500 to-blue-600 text-white flex justify-center items-center hover:opacity-95 transition-all shadow-md active:scale-95 focus:outline-none cursor-pointer flex-shrink-0">
+                <i class="fas fa-play text-[8px] ml-0.5" id="play-icon"></i>
             </button>
             
             <!-- Informasi Lagu -->
-            <div class="flex flex-col justify-center min-w-[70px] max-w-[110px] cursor-default text-left">
-                <span class="text-[11px] font-bold text-white tracking-tight truncate">33x</span>
-                <span class="text-[9px] font-medium text-cyan-300 tracking-wide truncate">Perunggu</span>
+            <div class="flex flex-col justify-center min-w-[50px] max-w-[80px] cursor-default text-left">
+                <span class="text-[10px] font-bold text-white tracking-tight truncate">33x</span>
+                <span class="text-[8px] font-medium text-cyan-300 tracking-wide truncate">Perunggu</span>
             </div>
 
             <!-- Equalizer Gelombang Audio -->
-            <div id="equalizer" class="flex items-end h-3 ml-0.5 px-0.5 flex-shrink-0">
+            <div id="equalizer" class="flex items-end h-2.5 px-0.5 flex-shrink-0">
                 <div class="bar" style="height: 3px;"></div>
-                <div class="bar" style="height: 7px;"></div>
+                <div class="bar" style="height: 6px;"></div>
                 <div class="bar" style="height: 4px;"></div>
-                <div class="bar" style="height: 10px;"></div>
+                <div class="bar" style="height: 8px;"></div>
             </div>
         </div>
+
     </footer>
 
     <!-- Library StPageFlip -->
