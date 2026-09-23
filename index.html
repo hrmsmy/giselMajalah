@@ -48,8 +48,8 @@
       .bg-glow-1,
       .bg-glow-2 {
         position: absolute;
-        width: 250px;
-        height: 250px;
+        width: 220px;
+        height: 220px;
         border-radius: 50%;
         filter: blur(80px);
         z-index: 0;
@@ -111,36 +111,36 @@
       }
 
       .b1 {
-        width: 80px;
-        height: 80px;
+        width: 70px;
+        height: 70px;
         top: 12%;
         left: 8%;
         animation: floatBubble 7s infinite ease-in-out alternate;
       }
       .b2 {
-        width: 140px;
-        height: 140px;
+        width: 120px;
+        height: 120px;
         top: 40%;
         right: -5%;
         animation: floatBubble 10s infinite ease-in-out alternate-reverse;
       }
       .b3 {
-        width: 60px;
-        height: 60px;
+        width: 50px;
+        height: 50px;
         bottom: 20%;
         left: 15%;
         animation: floatBubble 6s infinite ease-in-out alternate;
       }
       .b4 {
-        width: 45px;
-        height: 45px;
+        width: 40px;
+        height: 40px;
         top: 35%;
         left: 35%;
         animation: floatBubble 5s infinite ease-in-out alternate-reverse;
       }
       .b5 {
-        width: 95px;
-        height: 95px;
+        width: 80px;
+        height: 80px;
         bottom: 30%;
         right: 12%;
         animation: floatBubble 9s infinite ease-in-out alternate;
@@ -199,19 +199,20 @@
       .flipbook-wrapper {
         position: relative;
         width: 100%;
-        max-width: 390px;
+        max-width: 350px; /* Ukuran diperkecil dari 390px */
         flex: 1 1 auto;
         display: flex;
         justify-content: center;
         align-items: center;
         z-index: 10;
         padding: 0 4px;
-        /* Diubah ke visible agar spine 3D dan bayangan tidak terpotong */
         overflow: visible;
+        /* Mengecilkan tampilan majalah menjadi 90% secara otomatis */
+        transform: scale(0.9);
+        transform-origin: center center;
       }
 
       .flip-book {
-        /* Hapus shadow asli untuk digantikan dengan 3D shadow base */
         box-shadow: -2px 0 5px rgba(0, 0, 0, 0.2);
         display: none;
         margin: auto;
@@ -223,10 +224,9 @@
       .book-spine-3d {
         position: absolute;
         top: 1%;
-        left: -18px; /* Menggeser spine ke kiri buku */
-        width: 18px;
+        left: -16px;
+        width: 16px;
         height: 98%;
-        /* Gradien hijau gelap khas cover tebal */
         background: linear-gradient(
           to right,
           #022c22,
@@ -245,16 +245,16 @@
       /* Shadow Base 3D (Bayangan Realistis Buku) */
       .book-shadow-base {
         position: absolute;
-        top: 20px;
-        left: -15px;
+        top: 18px;
+        left: -12px;
         right: -5px;
-        bottom: -15px;
+        bottom: -12px;
         background: rgba(0, 0, 0, 0.5);
         box-shadow:
-          0 25px 45px rgba(0, 0, 0, 0.8),
-          0 10px 20px rgba(0, 0, 0, 0.6);
+          0 22px 40px rgba(0, 0, 0, 0.8),
+          0 8px 18px rgba(0, 0, 0, 0.6);
         border-radius: 12px;
-        filter: blur(14px);
+        filter: blur(12px);
         z-index: -2;
       }
 
@@ -344,14 +344,13 @@
 
     <!-- Header / Bagian Atas (2 Teks Judul Utama) -->
     <header
-      class="w-full pt-9 pb-1 px-3 text-center z-20 flex flex-col items-center justify-center pointer-events-none flex-shrink-0"
+      class="w-full pt-6 pb-1 px-3 text-center z-20 flex flex-col items-center justify-center pointer-events-none flex-shrink-0"
     >
       <!-- Judul Utama -->
       <h1
-        class="bubble-anim text-base font-black tracking-wide text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.6)] leading-tight"
+        class="bubble-anim text-sm font-black tracking-wide text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.6)] leading-tight"
       >
         EH, KOK
-        <!-- Diperbarui ke warna Hijau (Emerald & Lime) -->
         <span
           class="text-emerald-400 underline decoration-lime-500 decoration-2 underline-offset-4"
           >INTERNET</span
@@ -361,9 +360,9 @@
 
       <!-- Sub-Judul -->
       <div
-        class="bubble-sub-anim mt-1 px-2.5 py-0.5 rounded-lg bg-emerald-950/80 backdrop-blur-md border border-white/10 shadow-md"
+        class="bubble-sub-anim mt-1 px-2 py-0.5 rounded-lg bg-emerald-950/80 backdrop-blur-md border border-white/10 shadow-md"
       >
-        <p class="text-[9px] font-bold tracking-wider text-slate-200">
+        <p class="text-[8.5px] font-bold tracking-wider text-slate-200">
           <span class="text-yellow-400 font-extrabold">JEJAK DIGITAL</span>
           <span class="text-emerald-200 mx-0.5">DAN</span>
           <span class="text-lime-400 font-extrabold">MASA DEPAN REMAJA</span>
@@ -371,10 +370,9 @@
       </div>
     </header>
 
-    <!-- Wrapper Majalah PRESISI HP 360px - 390px -->
+    <!-- Wrapper Majalah PRESISI HP -->
     <div class="flipbook-wrapper">
       <div id="flipbook" class="flip-book">
-        <!-- Spine dan Shadow akan diinjeksi via JS agar tidak terhapus oleh init St.PageFlip -->
 
         <!-- Cover Depan -->
         <div class="page page-cover" data-density="hard">
@@ -383,7 +381,7 @@
             alt="Cover Depan"
             onerror="
               this.src =
-                'https://placehold.co/310x430/064e3b/ffffff?text=Cover+Depan'
+                'https://placehold.co/280x388/064e3b/ffffff?text=Cover+Depan'
             "
           />
         </div>
@@ -395,7 +393,7 @@
             alt="Halaman 2"
             onerror="
               this.src =
-                'https://placehold.co/310x430/e2e8f0/064e3b?text=Halaman+2'
+                'https://placehold.co/280x388/e2e8f0/064e3b?text=Halaman+2'
             "
           />
         </div>
@@ -405,7 +403,7 @@
             alt="Halaman 3"
             onerror="
               this.src =
-                'https://placehold.co/310x430/e2e8f0/064e3b?text=Halaman+3'
+                'https://placehold.co/280x388/e2e8f0/064e3b?text=Halaman+3'
             "
           />
         </div>
@@ -415,7 +413,7 @@
             alt="Halaman 4"
             onerror="
               this.src =
-                'https://placehold.co/310x430/e2e8f0/064e3b?text=Halaman+4'
+                'https://placehold.co/280x388/e2e8f0/064e3b?text=Halaman+4'
             "
           />
         </div>
@@ -425,7 +423,7 @@
             alt="Halaman 5"
             onerror="
               this.src =
-                'https://placehold.co/310x430/e2e8f0/064e3b?text=Halaman+5'
+                'https://placehold.co/280x388/e2e8f0/064e3b?text=Halaman+5'
             "
           />
         </div>
@@ -435,7 +433,7 @@
             alt="Halaman 6"
             onerror="
               this.src =
-                'https://placehold.co/310x430/e2e8f0/064e3b?text=Halaman+6'
+                'https://placehold.co/280x388/e2e8f0/064e3b?text=Halaman+6'
             "
           />
         </div>
@@ -445,7 +443,7 @@
             alt="Halaman 7"
             onerror="
               this.src =
-                'https://placehold.co/310x430/e2e8f0/064e3b?text=Halaman+7'
+                'https://placehold.co/280x388/e2e8f0/064e3b?text=Halaman+7'
             "
           />
         </div>
@@ -455,7 +453,7 @@
             alt="Halaman 8"
             onerror="
               this.src =
-                'https://placehold.co/310x430/e2e8f0/064e3b?text=Halaman+8'
+                'https://placehold.co/280x388/e2e8f0/064e3b?text=Halaman+8'
             "
           />
         </div>
@@ -465,7 +463,7 @@
             alt="Halaman 9"
             onerror="
               this.src =
-                'https://placehold.co/310x430/e2e8f0/064e3b?text=Halaman+9'
+                'https://placehold.co/280x388/e2e8f0/064e3b?text=Halaman+9'
             "
           />
         </div>
@@ -475,7 +473,7 @@
             alt="Halaman 10"
             onerror="
               this.src =
-                'https://placehold.co/310x430/e2e8f0/064e3b?text=Halaman+10'
+                'https://placehold.co/280x388/e2e8f0/064e3b?text=Halaman+10'
             "
           />
         </div>
@@ -485,7 +483,7 @@
             alt="Halaman 11"
             onerror="
               this.src =
-                'https://placehold.co/310x430/e2e8f0/064e3b?text=Halaman+11'
+                'https://placehold.co/280x388/e2e8f0/064e3b?text=Halaman+11'
             "
           />
         </div>
@@ -497,7 +495,7 @@
             alt="Cover Belakang"
             onerror="
               this.src =
-                'https://placehold.co/310x430/064e3b/ffffff?text=Cover+Belakang'
+                'https://placehold.co/280x388/064e3b/ffffff?text=Cover+Belakang'
             "
           />
         </div>
@@ -509,48 +507,47 @@
 
     <!-- Footer: Nama Kelompok (Kiri) dan Widget Musik (Kanan) Sejajar -->
     <footer
-      class="w-full px-3 pb-3 pt-1 z-50 flex justify-between items-center flex-shrink-0"
+      class="w-full px-3 pb-2 pt-1 z-50 flex justify-between items-center flex-shrink-0"
     >
       <!-- Nama Kelompok (Di Sebelah Kiri) -->
       <div
-        class="px-2.5 py-1.5 rounded-full bg-emerald-950/90 backdrop-blur-md border border-emerald-500/30 shadow-xl flex items-center"
+        class="px-2.5 py-1 rounded-full bg-emerald-950/90 backdrop-blur-md border border-emerald-500/30 shadow-xl flex items-center"
       >
         <p
-          class="text-[9px] font-semibold tracking-wide text-slate-200 whitespace-nowrap"
+          class="text-[8.5px] font-semibold tracking-wide text-slate-200 whitespace-nowrap"
         >
           kelompok 2 kokurikules
-          <!-- Diperbarui ke warna Hijau Emerald -->
           <span class="text-emerald-400 font-extrabold ml-1">XII F7</span>
         </p>
       </div>
 
       <!-- Widget Pemutar Musik Modern (Di Sebelah Kanan) -->
       <div
-        class="glass-panel rounded-full py-1 px-2.5 flex items-center gap-2 shadow-xl border border-emerald-500/30 bg-emerald-950/90"
+        class="glass-panel rounded-full py-1 px-2 flex items-center gap-1.5 shadow-xl border border-emerald-500/30 bg-emerald-950/90"
       >
-        <!-- Tombol Play / Pause (Gradien Tema Hijau) -->
+        <!-- Tombol Play / Pause -->
         <button
           id="play-btn"
-          class="w-6 h-6 rounded-full bg-gradient-to-r from-emerald-500 to-teal-600 text-white flex justify-center items-center hover:opacity-95 transition-all shadow-md active:scale-95 focus:outline-none cursor-pointer flex-shrink-0"
+          class="w-5 h-5 rounded-full bg-gradient-to-r from-emerald-500 to-teal-600 text-white flex justify-center items-center hover:opacity-95 transition-all shadow-md active:scale-95 focus:outline-none cursor-pointer flex-shrink-0"
         >
-          <i class="fas fa-play text-[8px] ml-0.5" id="play-icon"></i>
+          <i class="fas fa-play text-[7px] ml-0.5" id="play-icon"></i>
         </button>
 
         <!-- Informasi Lagu -->
         <div
-          class="flex flex-col justify-center min-w-[50px] max-w-[80px] cursor-default text-left"
+          class="flex flex-col justify-center min-w-[45px] max-w-[75px] cursor-default text-left"
         >
-          <span class="text-[10px] font-bold text-white tracking-tight truncate"
+          <span class="text-[9px] font-bold text-white tracking-tight truncate"
             >Happy!</span
           >
           <span
-            class="text-[8px] font-medium text-emerald-300 tracking-wide truncate"
+            class="text-[7.5px] font-medium text-emerald-300 tracking-wide truncate"
             >Mocca</span
           >
         </div>
 
         <!-- Equalizer Gelombang Audio -->
-        <div id="equalizer" class="flex items-end h-2.5 px-0.5 flex-shrink-0">
+        <div id="equalizer" class="flex items-end h-2 px-0.5 flex-shrink-0">
           <div class="bar" style="height: 3px"></div>
           <div class="bar" style="height: 6px"></div>
           <div class="bar" style="height: 4px"></div>
@@ -566,15 +563,15 @@
       document.addEventListener("DOMContentLoaded", function () {
         const flipBookElement = document.getElementById("flipbook");
 
-        // Ukuran khusus untuk layar HP 360px - 390px
+        // Ukuran disesuaikan agar 90% lebih kecil dibanding konfigurasi awal
         const pageFlip = new St.PageFlip(flipBookElement, {
-          width: 310,
-          height: 430,
+          width: 280,
+          height: 388,
           size: "stretch",
-          minWidth: 260,
-          maxWidth: 390,
-          minHeight: 360,
-          maxHeight: 560,
+          minWidth: 235,
+          maxWidth: 350,
+          minHeight: 325,
+          maxHeight: 500,
           maxShadowOpacity: 0.35,
           showCover: true,
           mobileScrollSupport: false,
@@ -585,27 +582,20 @@
           clickEventEnabled: true,
         });
 
-        // Load Halaman (Ini akan merekonstruksi isi dalam #flipbook)
+        // Load Halaman
         pageFlip.loadFromHTML(document.querySelectorAll(".page"));
         flipBookElement.style.display = "block";
 
-        /* 
-           INJEKSI ELEMEN 3D SECARA DINAMIS
-           Kita menambahkan spine dan shadow base *setelah* loadFromHTML 
-           agar struktur elemen 3D ini tidak terhapus oleh inisialisasi library St.PageFlip 
-           dan dapat menempel sempurna mengikuti dimensi wrapper buku.
-        */
+        /* INJEKSI ELEMEN 3D SECARA DINAMIS */
         const spineElement = document.createElement("div");
         spineElement.className = "book-spine-3d";
 
         const shadowElement = document.createElement("div");
         shadowElement.className = "book-shadow-base";
 
-        // Memasukkan elemen dekorasi 3D ke dalam kontainer utama flipbook
         flipBookElement.appendChild(shadowElement);
         flipBookElement.appendChild(spineElement);
 
-        // Menjaga Stabilitas Kerapihan saat Layar HP di-resize / Diputar
         window.addEventListener("resize", () => {
           pageFlip.updateFromHtml(document.querySelectorAll(".page"));
         });
@@ -625,7 +615,6 @@
           }
         }
 
-        // Preload file flip.mp3
         function loadFlipSound() {
           fetch("flip.mp3")
             .then((response) => response.arrayBuffer())
@@ -667,7 +656,7 @@
           }
         });
 
-        // Invisible Tap Zones (Tap area Kiri/Kanan layar HP)
+        // Invisible Tap Zones
         const tapLeft = document.getElementById("tap-left");
         const tapRight = document.getElementById("tap-right");
 
@@ -681,7 +670,7 @@
           pageFlip.flipNext();
         });
 
-        // Navigasi Panah Keyboard
+        // Navigasi Keyboard
         document.addEventListener("keydown", (e) => {
           if (e.key === "ArrowLeft") pageFlip.flipPrev();
           if (e.key === "ArrowRight") pageFlip.flipNext();
